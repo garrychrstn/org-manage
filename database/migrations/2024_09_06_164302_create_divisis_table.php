@@ -18,7 +18,6 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->foreignId('periode')->constrained();
-            $table->string('proker');
         });
     }
 

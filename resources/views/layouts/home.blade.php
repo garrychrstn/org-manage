@@ -10,7 +10,8 @@
     <title>@yield('title')</title>
     @vite('resources/css/app.css')
 </head>
-<body class='bg-gray-200'>
+<body class='bg-gray-200 relative'>
     @yield('content')
+    <x-nav />
 </body>
 </html>

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->year('year')->unique();
             $table->string('name')->unique();
-            $table->string('divisi');
             $table->timestamps();
         });
     }
