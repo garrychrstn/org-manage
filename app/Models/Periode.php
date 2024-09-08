@@ -9,4 +9,8 @@ class Periode extends Model
 {
     use HasFactory;
     protected $fillable = ['year', 'name'];
+    
+    public function divisiPeriode() {
+        return $this->hasMany(Divisi::class, 'periode');
+    }
 }
