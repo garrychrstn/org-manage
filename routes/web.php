@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PeriodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +18,10 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('/crud', function() { return view('tempcrud'); });
+
+Route::get('/crud', function() {
+
+    return view('tempcrud');
+});
+
+Route::post('/reg-periode', [PeriodeController::class, 'register']);
