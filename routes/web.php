@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Divisi;
 use App\Models\Periode;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\PeriodeController;
 
@@ -21,10 +23,15 @@ Route::get('/', function () {
 });
 
 
-Route::get('/crud', function() {
+Route::get('/crud', function () {
     $periodes = Periode::all();
-    return view('tempcrud', ['periodes' => $periodes]);
+    $divisis = Divisi::all();
+    return view('tempcrud', [
+        'periodes' => $periodes,
+        'divisis' => $divisis,
+    ]);
 });
 
 Route::post('/reg-periode', [PeriodeController::class, 'register']);
 Route::post('/reg-divisi', [DivisiController::class, 'register']);
+Route::post('/reg-member', [UserController::class, 'register']);
