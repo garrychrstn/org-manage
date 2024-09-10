@@ -21,8 +21,6 @@ use App\Http\Controllers\PeriodeController;
 Route::get('/', function () {
     return view('landing');
 });
-
-
 Route::get('/crud', function () {
     $periodes = Periode::all();
     $divisis = Divisi::all();
@@ -31,7 +29,11 @@ Route::get('/crud', function () {
         'divisis' => $divisis,
     ]);
 });
+Route::get('/login', function () {
+    return view('login');
+});
 
+Route::post('/login-user', [UserController::class, 'login']);
 Route::post('/reg-periode', [PeriodeController::class, 'register']);
 Route::post('/reg-divisi', [DivisiController::class, 'register']);
 Route::post('/reg-member', [UserController::class, 'register']);
