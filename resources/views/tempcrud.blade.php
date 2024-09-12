@@ -2,19 +2,32 @@
 
 @section('title', 'Temporary CRUD')
 @section('content')
-    <div class="temp-crud m-auto w-1/3 text-center bg-white rounded-md">
-        <h1>TEMPORARY CRUD</h1>
+    <div class="temp-crud m-auto w-1/3 text-center bg-white rounded-md mt-10 mb-20">
+        <div class="p-5">
+            <h1>TEMPORARY CRUD</h1>
+        </div>
         <div class="form-periode">
             <form method='post' action='reg-periode'>
                 <p>periode form</p>
                 @csrf
-                <input class='input' type='number' name='year' placeholder="year">
+                <input class='input' min="2019" type='number' name='year' placeholder="year-2019">
                 <input class='input' type='text' name='name' placeholder="name">
                 <button class='button'>register periode</button>
+                @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                </div>
+                @endif
+                
+                @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                </div>
+                @endif
             </form>
         </div>
         <div class="form-divisi">
-            <form method='post' action='reg-divisi'>
+            <form method='post' action='reg-divisi' class="mt-6">
                 <p>divisi form</p>
                 @csrf
                 <input class='input' type='text' name='name' placeholder="name">
@@ -25,7 +38,7 @@
                         <option value="{{ $periode->id }}">{{ $periode->name }}</option>
                     @endforeach
                 </select>
-                <button class='button'>register divisi</button>
+                <button class='button mt-1'>register divisi</button>
             </form>
         </div>
         <div class="form-proker">
@@ -44,15 +57,14 @@
                 <input class='input' type='number' name='nim' placeholder="nim">
                 <input class='input' type='text' name='name' placeholder="name">
                 <select name='divisi' id="divisi"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-auto">
+                    class="bg-gray-50 mb-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-auto">
                     <option selected>Pilih Divisi</option>
                     @foreach ($divisis as $divisi)
                         <option value="{{ $divisi->id }}">{{ $divisi->name }}</option>
                     @endforeach
                 </select>
                 <input class='input' type='email' name='email' placeholder="email">
-                <input class='input' type='password' name='password' placeholder="password">
-                <input class='input' type='number' name='angkatan' placeholder="angkatan">
+                <input class='input' type='password' name='password' placeholder="password">              
                 <input class='input' type='text' name='prodi' placeholder="prodi">
                 <button class='button'>register member</button>
             </form>

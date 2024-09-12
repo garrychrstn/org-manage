@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('periodes', function (Blueprint $table) {
             $table->id();
-            $table->year('year')->unique();
+            $table->year('year')->unique()->nullable();
             $table->string('name')->unique();
             $table->timestamps();
         });

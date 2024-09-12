@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Carbon;
 
 class UserController extends Controller
 {
@@ -16,12 +17,15 @@ class UserController extends Controller
             'divisi' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'angkatan' => 'required',
+            'angkatan' => 'nullable',//tak gae nullable gen ra error trus gen iso ke isi otomatis 
             'prodi' => 'required'
         ]);
         $toReg['password'] = bcrypt($toReg['password']);
-
+        //nek kosong otomatis ke isi nggo if - now()-year
+        if (empty($toReg['angkatan'])) {
+        $toReg['angkatan'] = Carbon::now()->year;
+    }
         User::create($toReg);
-        return redirect('/crud');
+        return redirect('/crud')->with('success', 'User berhasil didaftarkan!');;
     }
 }

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('divisi');
-            $table->year('angkatan');
+            $table->year('angkatan')->nullable();
             $table->string('prodi');
             $table->rememberToken();
             $table->timestamps();
