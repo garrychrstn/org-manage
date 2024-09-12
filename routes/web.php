@@ -19,7 +19,8 @@ use App\Http\Controllers\PeriodeController;
 */
 
 Route::get('/', function () {
-    return view('landing');
+    $handle = auth()->user();
+    return view('landing', ['handle' => $handle]);
 });
 Route::get('/crud', function () {
     $periodes = Periode::all();

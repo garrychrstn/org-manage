@@ -15,7 +15,10 @@
 
 <body class='bg-gray-200 relative'>
     @yield('content')
-    <x-nav />
+    @auth
+        <x-nav :handle="$handle"/>
+    @else
+    @endauth
 </body>
 
 </html>
