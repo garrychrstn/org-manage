@@ -1,0 +1,10 @@
+$user = new App\Models\User;
+$user->name = 'Rheyno';
+$user->email = 'rheyno@example.com';
+$user->password = bcrypt('password');
+$user->nim = 123456;
+$user->divisi = 'bem12';
+$user->prodi = 'komputer';
+$user->save()
+
+//file kosong gak usah dipedullikke ko\i nmau tak nggo nyobo nng tinker
