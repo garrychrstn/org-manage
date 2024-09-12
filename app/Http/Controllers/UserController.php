@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -17,26 +18,39 @@ class UserController extends Controller
             'divisi' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'angkatan' => 'nullable',//tak gae nullable gen ra error trus gen iso ke isi otomatis 
+            'angkatan' => 'nullable', //tak gae nullable gen ra error trus gen iso ke isi otomatis 
             'prodi' => 'required'
         ]);
         $toReg['password'] = bcrypt($toReg['password']);
         //nek kosong otomatis ke isi nggo if - now()-year
         if (empty($toReg['angkatan'])) {
-        $toReg['angkatan'] = Carbon::now()->year;
-    }
+            $toReg['angkatan'] = Carbon::now()->year;
+        }
         User::create($toReg);
         return redirect('/crud')->with('success', 'User berhasil didaftarkan!');;
     }
-    public function login(Request $r) {
+    public function login(Request $r)
+    {
         $toLog = $r->validate([
             'nim' => 'required',
             'password' => 'required'
         ]);
+        $currentMonth = date('m');
         if (auth()->attempt(['nim' => $r['nim'], 'password' => $r['password']])) {
             $r->session()->regenerate();
-            return redirect('/');
+
+            if (auth()->user()->division->name == 'Ketua' && $currentMonth == 9) {
+                return redirect('/setup-periode');
+            } else {
+                return redirect('/');
+            }
         } else {
-        return redirect('/login');}
+            return redirect('/login');
+        }
+    }
+    public function logout()
+    {
+        auth()->logout();
+        return redirect('/');
     }
 }

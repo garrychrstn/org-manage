@@ -31,10 +31,21 @@ Route::get('/crud', function () {
     ]);
 });
 Route::get('/login', function () {
-    return view('login');
+    $handle = auth()->user();
+    return view('login', ['handle' => $handle]);
+});
+Route::post('/logout', [UserController::class, 'logout']);
+
+Route::get('/manage', function () {
+    return view('manage');
+});
+Route::get('/setup-periode', function () {
+    $handle = auth()->user();
+    return view('setup', ['handle' => $handle]);
 });
 
 Route::post('/login-user', [UserController::class, 'login']);
 Route::post('/reg-periode', [PeriodeController::class, 'register']);
 Route::post('/reg-divisi', [DivisiController::class, 'register']);
 Route::post('/reg-member', [UserController::class, 'register']);
+Route::post('/mass-division', [DivisiController::class, 'masssub']);
