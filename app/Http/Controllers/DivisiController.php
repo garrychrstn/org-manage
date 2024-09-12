@@ -68,6 +68,7 @@ class DivisiController extends Controller
             foreach ($divss as $d) {
                 Divisi::create($d);
             }
+            return redirect('/setup-periode');
         }
     }
 }
