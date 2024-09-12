@@ -13,17 +13,17 @@ class PeriodeController extends Controller
             'year' => 'nullable',
             'name' => 'required'
         ]);
-
-         
-         $toReg['year'];
-         if (empty($toReg['year'])) {
+         //untuk memberi tahun secara otomatis jika tahun tidak terisi
+        if (empty($toReg['year'])) {
             $toReg['year'] = Carbon::now()->year;
         }
-
+        
+        //mendefinisikan object 
         $periodYear = $toReg['year'];
 
         $existingPeriod = Periode::where('year', $periodYear)->first();
-
+        
+        //memberi pesan jika tahun sudah ada
         if ($existingPeriod) {
             return redirect('/crud')->with('error', 'Tahun periode sudah ada.');
         }

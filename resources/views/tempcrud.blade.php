@@ -10,7 +10,7 @@
             <form method='post' action='reg-periode'>
                 <p>periode form</p>
                 @csrf
-                <input class='input' min="2019" type='number' name='year' placeholder="year-2019">
+               
                 <input class='input' type='text' name='name' placeholder="name">
                 <button class='button'>register periode</button>
                 @if (session('success'))
