@@ -24,4 +24,15 @@ class UserController extends Controller
         User::create($toReg);
         return redirect('/crud');
     }
+    public function login(Request $r) {
+        $toLog = $r->validate([
+            'nim' => 'required',
+            'password' => 'required'
+        ]);
+        if (auth()->attempt(['nim' => $r['nim'], 'password' => $r['password']])) {
+            $r->session()->regenerate();
+            return redirect('/');
+        } else {
+        return redirect('/login');}
+    }
 }
