@@ -18,56 +18,65 @@ class DivisiController extends Controller
     }
     public function masssub(Request $r)
     {
+        $current_user = auth()->user()->division;
+
         if ($r->divs == 'default') {
             $divss = [
                 [
                     'name' => 'ketua',
-                    'periode' => auth()->user()->division->periode
+                    'periode' => $current_user->periode
                 ],
                 [
                     'name' => 'wakil ketua',
-                    'periode' => auth()->user()->division->periode
+                    'periode' => $current_user->periode
                 ],
                 [
                     'name' => 'humas eksternal',
-                    'periode' => auth()->user()->division->periode
+                    'periode' => $current_user->periode
                 ],
                 [
                     'name' => 'humas internal',
-                    'periode' => auth()->user()->division->periode
+                    'periode' => $current_user->periode
                 ],
                 [
                     'name' => 'sekretaris',
-                    'periode' => auth()->user()->division->periode
+                    'periode' => $current_user->periode
                 ],
                 [
                     'name' => 'bendahara',
-                    'periode' => auth()->user()->division->periode
+                    'periode' => $current_user->periode
                 ],
                 [
                     'name' => 'sosial budaya',
-                    'periode' => auth()->user()->division->periode
+                    'periode' => $current_user->periode
                 ],
                 [
                     'name' => 'kominfo',
-                    'periode' => auth()->user()->division->periode
+                    'periode' => $current_user->periode
                 ],
                 [
                     'name' => 'olahraga',
-                    'periode' => auth()->user()->division->periode
+                    'periode' => $current_user->periode
                 ],
                 [
                     'name' => 'pendidikan',
-                    'periode' => auth()->user()->division->periode
+                    'periode' => $current_user->periode
                 ],
                 [
                     'name' => 'riset',
-                    'periode' => auth()->user()->division->periode
+                    'periode' => $current_user->periode
+                ],
+                [
+                    'name' => 'koordinator',
+                    'periode' => $current_user->periode
                 ],
             ];
             foreach ($divss as $d) {
                 Divisi::create($d);
             }
+            $setup = $current_user->periodes;
+            $setup->setup = true;
+
             return redirect('/setup-periode');
         }
     }

@@ -40,8 +40,10 @@ Route::get('/manage', function () {
     return view('manage');
 });
 Route::get('/setup-periode', function () {
+    $complete_division = auth()->user()->division->periodes->setup;
+
     $handle = auth()->user();
-    return view('setup', ['handle' => $handle]);
+    return view('setup', ['handle' => $handle, 'setup' => $complete_division]);
 });
 
 Route::post('/login-user', [UserController::class, 'login']);
