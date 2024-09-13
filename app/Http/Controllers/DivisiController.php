@@ -20,7 +20,9 @@ class DivisiController extends Controller
     {
         $current_user = auth()->user()->division;
 
+        // jika user memilih template, maka...
         if ($r->divs == 'default') {
+            // template divisi dari tahun ke tahun
             $divss = [
                 [
                     'name' => 'ketua',
@@ -71,6 +73,7 @@ class DivisiController extends Controller
                     'periode' => $current_user->periode
                 ],
             ];
+            // 
             foreach ($divss as $d) {
                 Divisi::create($d);
             }
@@ -78,6 +81,8 @@ class DivisiController extends Controller
             $setup->setup = true;
 
             return redirect('/setup-periode');
+        } else {
+            // form biasa, perlu di validasi, meh turu sik
         }
     }
 }

@@ -40,6 +40,7 @@ Route::get('/manage', function () {
     return view('manage');
 });
 Route::get('/setup-periode', function () {
+    // check status set up setiap kali masuk page ini, agar bisa menutup form divisi jika memang sudah diisi
     $complete_division = auth()->user()->division->periodes->setup;
 
     $handle = auth()->user();
